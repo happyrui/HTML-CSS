@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>数据不是由每个服务器请求传递的，而是只有在请求时使用数据。它使在不影响网站性能的情况下存储大量数据成为可能。</p>
+	<p>分为localStorage和sessionStorage</p>
+	<p><button onclick="clickCounter()" type="button">请点击这里</button></p>
+	<div id="result"></div>
+	<p>请点击按钮使计数器递增。</p>
+	<p>请关闭浏览器或标签页，然后再试一次，计数器会重置。</p>
+	<script>
+		if (localStorage.pagecount){
+			localStorage.pagecount=Number(localStorage.pagecount) +1;
+		}else{
+			localStorage.pagecount=1;
+		}
+		document.write("Visits: " + localStorage.pagecount + " time(s).");
+
+		function clickCounter() {
+		    if(typeof(Storage) !== "undefined") {
+		        if (sessionStorage.clickcount) {
+		            sessionStorage.clickcount = Number(sessionStorage.clickcount)+1;
+		        } else {
+		            sessionStorage.clickcount = 1;
+		        }
+		        document.getElementById("result").innerHTML = "在本 session 中，您已经点击这个按钮 " + sessionStorage.clickcount + " 次。";
+		    } else {
+		        document.getElementById("result").innerHTML = "抱歉！您的浏览器不支持 Web Storage ...";
+		    }
+		}
+
+		if (sessionStorage.pagecount){
+			sessionStorage.pagecount=Number(sessionStorage.pagecount) +1;
+		}else{
+			sessionStorage.pagecount=1;
+		}
+		document.write("Visits " + sessionStorage.pagecount + " time(s) this session.");
+	</script> 
+</body>
+</html>

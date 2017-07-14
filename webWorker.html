@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>web worker</title>
+</head>
+<body>
+	<p>web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。您可以继续做任何愿意做的事情：点击、选取内容等等，而此时 web worker 在后台运行。</p>
+	<p>javascript多线程解决方案,也就是说web worker和UI界面是运行在不同线程中的。</p>
+	<p>ie不支持</p>
+	<p>而是用于更耗费 CPU 资源的任务</p>
+	<p>创建web worker文件 xx.js</p>
+	<p> postMessage() 方法 - 它用于向 HTML 页面传回一段消息。</p>
+	<p>需要将xx.js与webworker.html放在同一web容器中，不然会报错 cannot be accessed from origin 'null'.</p>
+	<p>我机智的使用webstorm打开的，没有问题，棒棒哒</p>
+	<p>
+		由于 web worker 位于外部文件中，它们无法访问下例 JavaScript 对象：
+		window 对象
+		document 对象
+		parent 对象
+	</p>
+	<div id="result"></div>
+	<button onclick="startWorker()">开始 Worker</button> 
+	<button onclick="stopWorker()">停止 Worker</button>
+	<script>
+	// window.onload =function(){
+	// 	var w;
+	// 	if(typeof(Worker)!=='undefined'){
+	// 		//支持
+	// 		//创建web worker对象
+	// 		if(typeof(w)=='undefined'){
+	// 			w = new Worker('xx.js');
+	// 		}
+	// 		//发送数据
+	// 		w.onmessage = function(event){
+	// 			document.getElementById('result').innerHTML = event.data;
+	// 		}
+	// 	}else{
+	// 		//不支持
+	// 		document.getElementById('result').innerHTML = "不支持";
+	// 	}
+	// 	//终止
+	// 	w.terminate();
+	// }
+	var w;
+
+	function startWorker()
+	{
+	if(typeof(Worker)!=="undefined")
+	  {
+	  if(typeof(w)=="undefined")
+	  {
+	  w=new Worker("xx.js");
+	  }
+	  w.onmessage = function (event) {
+	    document.getElementById("result").innerHTML=event.data;
+	    };
+	  }
+	else
+	  {
+	  document.getElementById("result").innerHTML="Sorry, your browser does not support Web Workers...";
+	  }
+	}
+
+	function stopWorker()
+	{ 
+	w.terminate();
+	}	
+	</script>
+</body>
+</html>

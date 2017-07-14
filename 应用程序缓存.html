@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" manifest="demo.appcache">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p> web 应用可进行缓存，并可在没有因特网连接时进行访问</p>
+	<ul>
+		<li>离线浏览 - 用户可在应用离线时使用它们</li>
+		<li>速度 - 已缓存资源加载得更快</li>
+		<li>减少服务器负载 - 浏览器将只从服务器下载更新过或更改过的资源。</li>
+	</ul>
+	<p>IE不支持应用缓存</p>
+	<p>如需启用应用程序缓存，请在文档的 'html '标签中包含 manifest 属性</p>
+	<p>manifest文件是简单的文本文件，告知浏览器被缓存的内容</p>
+	<ul>
+	manifest 文件可分为三个部分：
+		<li>CACHE MANIFEST - 在此标题下列出的文件将在首次下载后进行缓存</li>
+		<li>NETWORK - 在此标题下列出的文件需要与服务器的连接，且不会被缓存</li>
+		<li>FALLBACK - 在此标题下列出的文件规定当页面无法访问时的回退页面（比如 404 页面）</li>
+	</ul>
+	<ul>
+	<p>完整的manifest文件</p>
+	CACHE MANIFEST
+	# 2012-02-21 v1.0.0
+	/theme.css
+	/logo.gif
+	/main.js
+
+	NETWORK:
+	login.asp
+
+	FALLBACK:
+	/html5/ /404.html
+	</ul>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>服务器发送事件</title>
+</head>
+<body>
+	<p>网页自动获取来自服务器的更新</p>
+	<p>ie不支持</p>
+	<ul>
+		<li>创建一个新的 EventSource 对象，然后规定发送更新的页面的 URL（本例中是 "demo_sse.php"）</li>
+		<li>每接收到一次更新，就会发生 onmessage 事件</li>
+		<li>当 onmessage 事件发生时，把已接收的数据推入 id 为 "result" 的元素中</li>
+	</ul>
+	<p>服务器端事件流的语法是非常简单的。把 "Content-Type" 报头设置为 "text/event-stream"。现在，您可以开始发送事件流了。</p>
+	<p>。结果发现Chrome每隔3秒向客户端推送一次，而FF是每5秒推送一次</p>
+	<div id="result"></div>
+	<script>
+		if(typeof(EventSource)!=='undefined'){
+			//支持
+			var source=new EventSource("demo_sse.php");
+			source.onmessage=function(event){
+			  document.getElementById("result").innerHTML+=event.data + "<br />";
+			};
+		}else{
+			 document.getElementById("result").innerHTML="抱歉，您的浏览器不支持 server-sent 事件 ...";
+		}
+	</script>
+</body>
+</html>
