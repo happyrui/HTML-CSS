@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>webStorage</title>
+    <style>
+    #mydiv,#divtext{width:500px;margin: 0 auto;}
+        textarea[id*="text"]{
+            width:300px;
+            height:200px;
+        }
+    </style>
+    <script type="text/javascript">
+        //添加留言
+        function addInfo() {
+            var info = document.getElementById("text");
+            var lstorage = window.localStorage;//获取localStorage对象，表示永久保存
+                                                  // 若改为sessionStorage,则表示无保存，关闭浏览器后键值对消失
+            if (lstorage.myBorad) {//判断对象中是否有myBorad键值对。
+                var date = new Date();
+                lstorage.myBorad += text.value + "\n发表时间：" + date.toLocaleString() + "\n";
+            } else {
+                var date = new Date();
+                lstorage.myBorad = text.value + "\n发表时间：" + date.toLocaleString() + "\n";
+            }
+            upInfo();
+        }
+        //将留言框的留言加到下面的留言框中
+        function upInfo(){
+            var lstorage = window.localStorage;//获取localStorage对象
+            var show=document.getElementById("textonly");
+            if(window.localStorage.myBorad) {
+                show.value =window.localStorage.myBorad;
+            }else{
+                show.value="还没有留言。快来抢第一个沙发吧！";
+            }
+        }
+        //清除留言
+        function cleanInfo(){
+            window.localStorage.removeItem("myBorad");
+            upInfo();
+        }
+    </script>
+</head>
+<body>
+    <div id="mydiv">
+        <p>请在这里留言</p>
+        <textarea id="text"></textarea><br/>
+        <button class="liuyan" onclick="addInfo()">留言</button>
+        <button class="shanchu" onclick="cleanInfo()">删除留言</button>
+        <hr/>
+        <div id="divtext">
+            <textarea id="textonly" readonly="readonly"></textarea>
+        </div>
+    </div> 
+</body>
+</html>
